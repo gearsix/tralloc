@@ -1,5 +1,10 @@
 #include "stdlibw.h"
 
+/** _heap
+ * main function for tracking allocated heap memory using a
+ * `static size_t`. Only tracked memory allocated with other
+ * _stdlibw_ functions
+**/
 static size_t _heap(char op, size_t n)
 {
 	static size_t siz = 0, lim = 0;
