@@ -1,0 +1,21 @@
+LEGEND
+------
+
+[x] = done; 
+[~] = in-progress; 
+[-] = won't do; 
+[ ] = not started;
+
+(!) = Priority; 
+(W) = Will do; 
+(S) = Should do; 
+(C) = Could do; 
+(N) = Won't do; 
+(?) = Needs investigating;
+
+TODO
+----
+- [x] (N) Handle user errors (e.g. calling `htrack_allocsiz` on pointer not allocated by htrack).
+  The stdlib doesn't do this for `free` when you call it on a pointer not malloc'd.
+- [ ] (S) Find a better way to handle errors that assert(...)
+  This was a semi-temporary handler for development.
