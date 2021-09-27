@@ -14,6 +14,7 @@ size_t htrack_siz();
 /* the max. number of heap-allocated bytes htrack will allow */
 size_t htrack_limit();
 
+/* set the max. number of heap-allocated bytes htrack will allow, 0 = infinite */
 size_t htrack_setlimit(size_t n);
 
 /* The number of bytes allocated for `ptr`.
