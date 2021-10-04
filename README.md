@@ -22,10 +22,15 @@ allocation functions, then it'll cause a memory error.
 This behaviour is consistent with stdlib though. Make sure to read
 function documentation.
 
+This was done more as a personal exercise than anything, most of the
+time in C you'll track allocated memory yourself. This was just a
+cool idea I got carried away with.
+
 ## Goals
 
 - Track the total number of heap-allocated bytes.
 - Track number of bytes allocated for individual pointers.
+- Don't get in the way of any users.
 
 ## Guidelines
 
