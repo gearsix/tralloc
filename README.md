@@ -1,5 +1,5 @@
 
-# htrack
+# tralloc
 
 An ANSI-C libray for tracking heap-allocated memory.
 
@@ -17,7 +17,7 @@ allocations made without these wrappers. This is acceptable since
 it's intended to be used for tracking allocations made by yourself.
 
 There are also a few usability pitfalls: if you call some of the
-functions on pointers that **have not** been allocated by htrack
+functions on pointers that **have not** been allocated by tralloc
 allocation functions, then it'll cause a memory error.
 This behaviour is consistent with stdlib though. Make sure to read
 function documentation.
@@ -34,48 +34,48 @@ cool idea I got carried away with.
 
 ## Guidelines
 
-- **Do not** call `htrack_realloc()`, `htrack_allocsiz()` or
-`htrack_free` on a pointer not allocated by one of the htrack stdlib
+- **Do not** call `tralloc_realloc()`, `tralloc_allocsiz()` or
+`tralloc_free` on a pointer not allocated by one of the tralloc stdlib
 wrapper functions (same way you wouldn't call free on a pointer you
 didn't allocate with stdlib). Otherwise you'll probably run into a
 segfault.
-- Don't expect htrack to track memory allocated outside of it's own
-htrack functions.
-- You should be able to use the _htrack stdlib wrappers_ just as you
+- Don't expect tralloc to track memory allocated outside of it's own
+tralloc functions.
+- You should be able to use the _tralloc stdlib wrappers_ just as you
 would use their stdlib counterparts without error.
 
 ## API
 
-**htrack_siz**
+**tralloc_siz**
 
-	size_t htrack_siz();
+	size_t tralloc_siz();
 
-Returns the number of bytes heap-allocated by _htrack memory allocation_
+Returns the number of bytes heap-allocated by _tralloc memory allocation_
 functions.
 
-**htrack_limit**
+**tralloc_limit**
 
-	size_t htrack_limit();
+	size_t tralloc_limit();
 
-Returns the maximum limit set on `htrack_siz`.
+Returns the maximum limit set on `tralloc_siz`.
 If 0 is returned, there is no limit (returns 0 by default).
 
-**htrack_setlimit**
+**tralloc_setlimit**
 
-	size_t htrack_setlimit(size_t n);
+	size_t tralloc_setlimit(size_t n);
 
-Sets the maximum limit on `htrack_siz`.
-If this limit is reached, then htrack alloc functions will fail and
+Sets the maximum limit on `tralloc_siz`.
+If this limit is reached, then tralloc alloc functions will fail and
 return NULL.
 Returns `n` if successful and 0 if unsuccessful.
 
-**htrack_allocsiz**
+**tralloc_allocsiz**
 
-	size_t htrack_allocsiz(void *ptr);
+	size_t tralloc_allocsiz(void *ptr);
 
 Returns number of bytes allocated for `ptr`.
 
-> `ptr` **must** be a _htrack allocated pointer_.
+> `ptr` **must** be a _tralloc allocated pointer_.
 
 ### stdlib wrappers
 
@@ -87,25 +87,25 @@ tracked heapsiz accordingly.
 This overhead is stored at index [-1] of the returned pointers and
 used by functions within the library for tracking the heapsiz.
 
-**htrack_malloc**
+**tralloc_malloc**
 
-	void *htrack_malloc(size_t n);
+	void *tralloc_malloc(size_t n);
 
-**htrack_calloc**
+**tralloc_calloc**
 
-	void *htrack_calloc(size_t num, size_t n);
+	void *tralloc_calloc(size_t num, size_t n);
 
-**htrack_realloc**
+**tralloc_realloc**
 
-	void *htrack_realloc(void *ptr, size_t n);
+	void *tralloc_realloc(void *ptr, size_t n);
 
-> `ptr` **must** be a pointer allocated by htrack.
+> `ptr` **must** be a pointer allocated by tralloc.
 
-**htrack_free**
+**tralloc_free**
 
-	void htrack_free(void *ptr);
+	void tralloc_free(void *ptr);
 
-> `ptr` **must** be a pointer allocated by htrack.
+> `ptr` **must** be a pointer allocated by tralloc.
 
 ## Authors
 
