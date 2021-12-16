@@ -14,9 +14,8 @@ int main (int argc, char *argv[])
 	size_t siz;
 	char *str;
 
-	printf("tr_siz: %lu\n", tr_siz());
+	printf("tr_siz: %lu, tr_limit: %lu\n", tr_siz(), tr_limit());
 	if (tr_siz() != 0) fail("initial tr_siz not 0\n");
-	printf("tr_limit: %lu\n", tr_limit());
 	if (tr_limit() != 0) fail("initial tr_setlimit not 0\n");
 
 	siz = 6;
@@ -41,6 +40,8 @@ int main (int argc, char *argv[])
 
 	siz = 6;
 	tr_setlimit(10);
+	puts("the following should cause an assertion failure:");
+	fflush(stdout);
 	str = tr_calloc(2, siz); /* should cause assertion failure */
 	printf("str = '%s', %zu bytes\n", str, tr_allocsiz(str));
 	tr_free(str);
