@@ -1,5 +1,5 @@
 
-# tralloc
+# tralloc - track allocations
 
 An ANSI-C libray for tracking heap-allocated memory.
 
@@ -43,6 +43,8 @@ segfault.
 tralloc functions.
 - You should be able to use the _tralloc stdlib wrappers_ just as you
 would use their stdlib counterparts without error.
+- If you want to use `malloc` instead of `tr_malloc`, use a macro.
+See `test.c` for an example of this.
 
 ## API
 

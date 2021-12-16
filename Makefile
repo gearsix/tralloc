@@ -10,7 +10,7 @@ all:
 
 test:
 	rm -f test
-	${CC} -Wall -pedantic -g -o test test.c tralloc.c
+	${CC} -Wall -pedantic -g -DTRALLOC_WRAP -o test test.c tralloc.c
 	@./test
 
 clean:
