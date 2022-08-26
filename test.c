@@ -3,24 +3,23 @@
 #include <stdlib.h>
 #include "tralloc.h"
 
+void test_tralloc();
+void test_tralloc_wrap();
+
 void fail(const char *msg)
 {
 	fprintf(stderr, msg);
 	exit(EXIT_FAILURE);
 }
 
-int main (int argc, char *argv[])
+int main ()
 {
-	size_t siz;
-	char *str;
-
-#ifdef TRALLOC_WRAP /* example of how to replace stdlib functions */
-	#define malloc(n)		tr_malloc(n)
-	#define calloc(num, n)	tr_calloc(num, n)
-	#define realloc(ptr, n)	tr_realloc(ptr, n)
-	#define free(ptr)		tr_free(ptr)
-
-	test_tralloc_wrap (); /* calls malloc, calloc, realloc, free */
+#ifdef TRALLOC_WRAP
+	#define malloc(n)       tr_malloc(n)
+	#define calloc(num, n)  tr_calloc(num, n)
+	#define realloc(ptr, n) tr_realloc(ptr, n)
+	#define free(ptr)       tr_free(ptr)
+	test_tralloc_wrap ();
 #else
 	test_tralloc();
 #endif
@@ -30,6 +29,9 @@ int main (int argc, char *argv[])
 
 void test_tralloc()
 {
+	size_t siz;
+	char *str;
+
 	printf("tr_siz: %lu, tr_limit: %lu\n", tr_siz(), tr_limit());
 	if (tr_siz() != 0) fail("initial tr_siz not 0\n");
 	if (tr_limit() != 0) fail("initial tr_setlimit not 0\n");
@@ -65,6 +67,9 @@ void test_tralloc()
 
 void test_tralloc_wrap()
 {
+	size_t siz;
+	char *str;
+
 	printf("tr_siz: %lu, tr_limit: %lu\n", tr_siz(), tr_limit());
 	if (tr_siz() != 0) fail("initial tr_siz not 0\n");
 	if (tr_limit() != 0) fail("initial tr_setlimit not 0\n");
@@ -97,4 +102,3 @@ void test_tralloc_wrap()
 	printf("str = '%s', %zu bytes\n", str, tr_allocsiz(str));
 	free(str);
 }
-
